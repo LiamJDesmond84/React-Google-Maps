@@ -12,6 +12,20 @@
   z-index: 1;
 }
 
+.locate {
+  position: absolute;
+  top: 6rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  z-index: 10;
+}
+
+img {
+  height: 43px;
+  width: 43px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

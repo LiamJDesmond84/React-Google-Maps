@@ -3,6 +3,7 @@ import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps
 import { formatRelative } from 'date-fns'
 import "@reach/combobox/styles.css"
 import Search from './Search'
+import Locate from './Locate'
 
 const mapContainerStyle = {
     width: "100vw",
@@ -29,10 +30,14 @@ export const GoogleMaps = () => {
         time: new Date()
     }]), []);
 
-    // React.useRef();
     const mapRef = useRef();
     const onMapLoad = React.useCallback((map) => {
         mapRef.current = map;
+    }, [])
+
+    const panTo = React.useCallback(({lat, lng}) => { // Pans to selected location from search and zooms in
+        mapRef.current.panTo({lat, lng});
+        mapRef.current.setZoom(14);
     }, [])
 
 
@@ -46,7 +51,8 @@ export const GoogleMaps = () => {
     return (
         <div>
             <h1>Map (in progress)</h1>
-            <Search />
+            <Search panTo={panTo} />
+            <Locate panTo={panTo}  />
             <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} onClick={onMapClick} onLoad={onMapLoad} >
                 {markers.map(x => <Marker key={x.time.toISOString()} position={{ lat: x.lat, lng: x.lng }} onClick={() => setSelected(x)} />)}
 
@@ -54,9 +60,9 @@ export const GoogleMaps = () => {
             <InfoWindow position={{lat: selected.lat, lng: selected.lng}} onCloseClick={() => setSelected(null)}>
                 {/* onCloseClick={() => setSelected(null) - After closing info window, can re-open another*/}
                 <div>
-                    <h2>Whateva</h2>
-                    <p>Stuff happened at {formatRelative(selected.time, new Date())}</p> {/* current relative time */}
-                    <p>Location {selected.lat}</p>
+                    <h2>New Location</h2>
+                    <p>Time clicked: {formatRelative(selected.time, new Date())}</p> {/* current relative time */}
+                    <p>Latitude: {selected.lat}, Longitude: {selected.lng}</p>
                 </div>
             </InfoWindow>) 
             : null }
