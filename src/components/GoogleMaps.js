@@ -2,8 +2,6 @@ import React, { useState, useRef } from 'react'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api"
 import { formatRelative } from 'date-fns'
 import "@reach/combobox/styles.css"
-import usePlacesAutoComplete, { getGeocode, getLatLng } from "use-places-autocomplete"
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox"
 import Search from './Search'
 
 const mapContainerStyle = {
