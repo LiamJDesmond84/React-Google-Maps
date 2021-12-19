@@ -18,13 +18,13 @@ const Search = (props) => {
     return (
         <div className="search-bar">
             <Combobox onSelect={async (address) => {
-                setValue(address, false); {/* sets value to what the user selected, "shouldFetchData: false" we already know the value the user selected */}
+                setValue(address, false); //sets value to what the user selected, "shouldFetchData: false" we already know the value the user selected
                 clearSuggestions();
 
-                try { {/* Geocoding address, converting the results to lat/long, passes lat/long to panTo function */}
+                try { //Geocoding address, converting the results to lat/long, passes lat/long to panTo function
                     const results = await getGeocode({ address} );
                     const {lat, lng} = await getLatLng(results[0])
-                    panTo({ lat, lng }); {/* call panTo function in GoogleMaps.js */}
+                    panTo({ lat, lng }); //call panTo function in GoogleMaps.js
                 }
                 catch(err) {
                 console.log(err);
