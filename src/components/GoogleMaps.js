@@ -9,10 +9,12 @@ const mapContainerStyle = {
     width: "100vw",
     height: "100vh"
 }
+
 const center = { // San Diego lat & lng
     lat: 32.715736,
     lng: -117.161087
 }
+
 // const options = { // https://snazzymaps.com/
 //     styles: 
 // }
