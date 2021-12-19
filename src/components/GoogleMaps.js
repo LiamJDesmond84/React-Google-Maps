@@ -45,7 +45,7 @@ export const GoogleMaps = () => {
     if (!isLoaded) return "Loading Maps";
     return (
         <div>
-            <h1>Booyah!!</h1>
+            <h1>Map (in progress)</h1>
             <Search />
             <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center} onClick={onMapClick} onLoad={onMapLoad} >
                 {markers.map(x => <Marker key={x.time.toISOString()} position={{ lat: x.lat, lng: x.lng }} onClick={() => setSelected(x)} />)}
