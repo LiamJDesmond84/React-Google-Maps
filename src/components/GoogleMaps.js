@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api"
 import { formatRelative } from 'date-fns'
 import "@reach/combobox/styles.css"
@@ -26,18 +26,18 @@ export const GoogleMaps = () => {
     const [markers, setMarkers] = useState([])
     const [selected, setSelected] = useState(null);
 
-    const onMapClick = React.useCallback((e) => setMarkers(currentState => [...currentState, { // Adding new markers on click
+    const onMapClick = useCallback((e) => setMarkers(currentState => [...currentState, { // Adding new markers on click
         lat: e.latLng.lat(),
         lng: e.latLng.lng(),
         time: new Date()
     }]), []);
 
     const mapRef = useRef();
-    const onMapLoad = React.useCallback((map) => {
+    const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, [])
 
-    const panTo = React.useCallback(({lat, lng}) => { // Pans to selected location from search and zooms in
+    const panTo = useCallback(({lat, lng}) => { // Pans to selected location from search and zooms in
         mapRef.current.panTo({lat, lng});
         mapRef.current.setZoom(14);
     }, [])
